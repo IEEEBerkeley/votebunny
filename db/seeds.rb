@@ -7,12 +7,50 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # create election
-e = Election.create!(:title => 'IEEE Director Elections')
+e = Election.create!(:title => 'IEEE Elections Sp14')
 
 # create admin
 u = User.new(:password => 'noelmon69', :is_admin => true)
 u.elections << e
 u.save!
+
+passwords = []
+(1..45).each do |u|
+  passwords.push((0...3).map { ('a'..'z').to_a[rand(26)] }.join + SecureRandom.random_number(100).to_s)
+end
+passwords.each do |pw|
+  u = User.new(:password => pw, :is_admin => false)
+  u.elections << e
+  u.save!
+end
+
+
+# create positions and candidates
+
+runners = {
+  'President' => ['Vikram', 'Skyler'],
+  'IVP' => ['Gokul', 'Ingrid', 'Skyler'],
+  'EVP' => ['Skyler', 'Michael', 'Vikram'],
+  'Treasurer' => ['Tom', 'Michael', 'Jamshed'],
+  'Secretary' => ['Gokul'],
+  'Indrel Director' => ['Jamshed', 'Luca'],
+  'Activities Director' => ['Gokul', 'Lauren', 'Lori'],
+  'TechOps Director' => ['Gautham', 'Roy'],
+  'Website Director' => ['Alex', 'Nate'],
+  'IO Director' => ['Jack', 'Ingrid', 'Lauren'],
+  'HOPE Director' => ['Ronald', 'Andrew', 'James', 'Chitanya', 'Victor', 'Max', 'Sudip'],
+  'Prodev Director' => ['Vikram N', 'Colin', 'Michael']
+}
+
+runners.each do |position, candidates|
+  p = Position.new(:title => position, :election => e)
+  p.save!
+  candidates.each do |candidate|
+    c = Candidate.new(:name => candidate, :election => e)
+    c.positions << p
+    c.save!
+  end
+end
 
 # create users
 =begin
