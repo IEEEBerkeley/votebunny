@@ -6,6 +6,7 @@
 <%= link_to 'View voters', view_users_path(@election.id) if @user.is_admin %>
 
 <h1>Positions</h1>
+<%= link_to 'View Votes', admin_election_path(@election.id) if @user.is_admin%>
 <table>
   <thead>
     <tr>
