@@ -5,6 +5,8 @@ class Vote < ActiveRecord::Base
   belongs_to :position
   belongs_to :candidate
 
+  scope :for_position, ->(position, rank=1){ where( position_id: position, rank: rank) }
+  scope :primary_for, ->(position){ for_position(position, 1)}
   # vote for a candidate for a position
   # assumes correct input is being passed
   def self.vote(user, position, candidate, rank)

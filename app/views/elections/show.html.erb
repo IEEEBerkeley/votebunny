@@ -16,6 +16,7 @@
       <th>Candidates</th>
       <th>Vote</th>
       <% if @user.is_admin %>
+      <th>Submitted</th>
       <th>Add Candidate</th>
       <% end %>
     </tr>
@@ -30,6 +31,7 @@
       <td><%= position.candidates.length %></td>
       <td><%= @votes[position].blank? ? "Vote in Progress" : @votes[position] %></td>
       <% if @user.is_admin %>
+      <td><%= "#{Vote.primary_for(position).count } of #{User.for_election(@election).count}" %></td>
       <td><%= link_to 'New Candidate', new_candidate_path(@election.id, position.id) if @user.is_admin %></td>
       <% end %>
     </tr>
