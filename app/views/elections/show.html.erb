@@ -14,6 +14,9 @@
       <th>Position</th>
       <th>Candidates</th>
       <th>Vote</th>
+      <% if @user.is_admin %>
+      <th>Add Candidate</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +27,10 @@
       <% end %>
       <td><%= link_to position.title, position_path(@election.id, position.id) %></td>
       <td><%= position.candidates.length %></td>
-      <td><%= @votes[position] %></td>
+      <td><%= @votes[position].blank? ? "Vote in Progress" : @votes[position] %></td>
+      <% if @user.is_admin %>
+      <td><%= link_to 'New Candidate', new_candidate_path(@election.id, position.id) if @user.is_admin %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>
