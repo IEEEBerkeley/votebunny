@@ -5,5 +5,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :elections, :uniq => true
   has_many :votes
+  scope :for_election, ->(eid) { includes(:elections).where( elections: { :id => eid }) }
+  scope :admins, ->{ where( is_admin: true) }
+  scope :non_admins, ->{ where( is_admin: false) }
 
 end

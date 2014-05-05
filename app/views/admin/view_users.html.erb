@@ -1,0 +1,24 @@
+<%= render '/header' %>
+
+<%= link_to 'Elections', elections_path %>
+
+<h1><% @users.count %><%= pluralize(@users.count, 'user') %></h1>
+
+<table>
+    <thead>
+        <tr>
+            <td>index</td>
+            <td>user_id</td>
+            <td>password</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each_with_index do |user, i|  %>
+             <tr>
+                <td><%= i+1 %></td>
+                <td><%= user.id %></td>
+                <td><%= user.password %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

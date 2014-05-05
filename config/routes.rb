@@ -47,4 +47,5 @@ Votebunny::Application.routes.draw do
   match '/admin/election/:eid/position/:pid/candidate/create' => 'admin#create_candidate', :as => 'create_candidate'
 
   match '/admin/election/:eid/user/create' => 'admin#create_user', :as => 'create_user'
+  match '/admin/election/:eid/users/' => 'admin#view_users', :as => 'view_users'
 end

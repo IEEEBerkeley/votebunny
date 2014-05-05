@@ -3,6 +3,7 @@
 <%= link_to 'Elections', elections_path %>
 <%= link_to 'New Position', new_position_path(@election.id) if @user.is_admin %>
 <%= link_to 'New User', create_user_path(@election.id) if @user.is_admin %>
+<%= link_to 'View voters', view_users_path(@election.id) if @user.is_admin %>
 
 <h1>Positions</h1>
 <table>

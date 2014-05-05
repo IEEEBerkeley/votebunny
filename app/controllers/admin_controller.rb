@@ -49,6 +49,10 @@ class AdminController < ApplicationController
     end
   end
 
+  def view_users
+    @users=User.for_election(params[:eid]).non_admins
+  end
+
   # this does not create a candidate that allows for other positions
   def create_candidate
     c = Candidate.new(params[:candidate])
